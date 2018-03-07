@@ -1240,6 +1240,23 @@
         <rename>QUARTER</rename>
       </field>
       <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>CALENDAR_DATE</name>
+        <rename>CALENDAR_DATE</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy-MM-dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -1298,7 +1315,7 @@
     </partitioning>
     <connection>hadoop</connection>
     <sql>select a.*,b.ltv, revenue/if(coalesce(mktgspend,0)=0,1,mktgspend) as roas from
-(select a.temp_id,from_unixtime(unix_timestamp(a.calendar_date,'yyyy-MM-dd'),'yyyy-MM-dd') calendar_date,year(calendar_date) year,month(calendar_date) month,(INT((MONTH(calendar_date)-1)/3)+1) quarter,weekofyear(calendar_date) weekofyear,sum(a.clicks) clicks,sum(a.conv) conv,sum(a.imps) imps,sum(profit) profit,
+(select a.temp_id,cast(a.calendar_date as date) calendar_date,year(calendar_date) year,month(calendar_date) month,(INT((MONTH(calendar_date)-1)/3)+1) quarter,weekofyear(calendar_date) weekofyear,sum(a.clicks) clicks,sum(a.conv) conv,sum(a.imps) imps,sum(profit) profit,
 sum(revenue) revenue,avg(a.ctr) ctr,avg(a.conv_rate) conv_rate,avg(a.avg_cpc) avg_cpc,sum(a.mktgspend) mktgspend,sum(totalacqOrder) newCust, sum(totalacqorder+totalretorder)  as numOrder ,sum(c.acqCpo) acqcpo from channelkpi2 a
  left  join channelanalyticskpi2 b on a.temp_id=b.temp_id and a.calendar_date=b.trans_date
 left join cost1 c on a.temp_id=c.temp_id and a.calendar_date=c.calendar_date
