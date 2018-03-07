@@ -13,7 +13,7 @@
   <parameters>
     <parameter>
       <name>HOST</name>
-      <default_value>34.239.170.20</default_value>
+      <default_value/>
       <description/>
     </parameter>
     <parameter>

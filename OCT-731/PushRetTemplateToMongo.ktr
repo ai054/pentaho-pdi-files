@@ -552,7 +552,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>index_type</name>
+        <name>INDEX_TYPE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -790,15 +790,15 @@
     <use_json_query>N</use_json_query>
     <mongo_fields>
       <mongo_field>
-        <mongo_doc_path>account_id</mongo_doc_path>
+        <mongo_doc_path>ACCOUNT_ID</mongo_doc_path>
         <comparator>=</comparator>
-        <incoming_field_1>account</incoming_field_1>
+        <incoming_field_1>ACCOUNT_ID</incoming_field_1>
         <incoming_field_2/>
       </mongo_field>
       <mongo_field>
-        <mongo_doc_path>index_typpe</mongo_doc_path>
+        <mongo_doc_path>INDEX_TYPE</mongo_doc_path>
         <comparator>=</comparator>
-        <incoming_field_1>index_type</incoming_field_1>
+        <incoming_field_1>INDEX_TYPE</incoming_field_1>
         <incoming_field_2/>
       </mongo_field>
     </mongo_fields>
@@ -849,7 +849,7 @@
     <write_retry_delay>10</write_retry_delay>
     <mongo_fields>
       <mongo_field>
-        <incoming_field_name>account_id</incoming_field_name>
+        <incoming_field_name>ACCOUNT_ID</incoming_field_name>
         <mongo_doc_path/>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
         <update_match_field>N</update_match_field>
@@ -859,7 +859,7 @@
         <allow_null>N</allow_null>
       </mongo_field>
       <mongo_field>
-        <incoming_field_name>index_type</incoming_field_name>
+        <incoming_field_name>INDEX_TYPE</incoming_field_name>
         <mongo_doc_path/>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
         <update_match_field>N</update_match_field>
@@ -1046,11 +1046,11 @@
     <fields>
       <field>
         <name>account</name>
-        <rename>account_id</rename>
+        <rename>ACCOUNT_ID</rename>
       </field>
       <field>
         <name>index_type</name>
-        <rename/>
+        <rename>INDEX_TYPE</rename>
       </field>
       <field>
         <name>temp_id</name>
@@ -1158,6 +1158,7 @@
     <fields>
       <field>
         <name>account</name>
+        <rename>ACCOUNT_ID</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1198,9 +1199,9 @@
 select 'retention' as index_type,a.year as year,a.monthofyear,a.quater,a.start_date,a.temp_id,totalorder,revenue,profit,totaluniquecustomer,numcustlost,numcustinactive,numcustactive,regain,lostpot,delta_ltv
 from (select year(trans_date) year,month(trans_date) monthofyear,(INT((MONTH(trans_date)-1)/3)+1) quater,date_add(trans_date, 1-day(trans_date)+1) as start_date,temp_id,sum(retorder) as totalorder,round(sum(revenue),2) as revenue,round(sum(profit),2) as profit,round(sum(totaluniquecustomer),2) as totaluniquecustomer from retentionOrderKpi1
 group by year(trans_date),month(trans_date),(INT((MONTH(trans_date)-1)/3)+1),date_add(trans_date, 1-day(trans_date)+1),temp_id) a
- --left join
---(select year(transdate) as year,month(transdate) as monthofyear , date_add(transdate, 1-day(transdate)+1) as start_date,channel,sum(cpo) as cpo ,coalesce(sum(RetCost),0) as RetCost from retention_cost
---group by year(transdate),month(transdate) , date_add(transdate, 1-day(transdate)+1),channel) b on a.year=b.year and a.monthofyear=b.monthofyear and a.channel=b.channel
+left join
+(select temp_id, month(calendar_date) monthofyear, year(calendar_date) year , avg(retcpo) retcpo from cost1
+group by temp_id, month(calendar_date), year(calendar_date)) b on a.year=b.year and a.monthofyear=b.monthofyear and a.temp_id=b.temp_id
 left join (select year_int,month_of_year,temp_id,numcustlost,numcustinactive,numcustactive,regain,lostpot,delta_ltv from RetentionSummary_month1) c on a.year=c.year_int and a.monthofyear=c.month_of_year and a.temp_id=c.temp_id</sql>
     <limit>0</limit>
     <lookup/>
