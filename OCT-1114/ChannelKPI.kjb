@@ -24,7 +24,7 @@
   </parameters>
   <connection>
     <name>hadoop</name>
-    <server>34.239.170.20</server>
+    <server>${HOST}</server>
     <type>HIVE2</type>
     <access>Native</access>
     <database>feeds</database>
@@ -402,6 +402,11 @@
           <stream_name/>
           <value>${account}</value>
         </parameter>
+        <parameter>
+          <name>HOST</name>
+          <stream_name/>
+          <value>${HOST}</value>
+        </parameter>
       </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -437,7 +442,7 @@ group by account_id,channel,a.calendar_date;</sql>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>384</xloc>
       <yloc>96</yloc>
     </entry>
     <entry>

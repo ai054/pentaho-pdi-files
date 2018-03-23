@@ -379,13 +379,23 @@
       <run_configuration>Pentaho local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>HOST</name>
+          <stream_name/>
+          <value>${HOST}</value>
+        </parameter>
+        <parameter>
+          <name>account</name>
+          <stream_name/>
+          <value>${account}</value>
+        </parameter>
       </parameters>
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>416</xloc>
-      <yloc>208</yloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>Success</name>

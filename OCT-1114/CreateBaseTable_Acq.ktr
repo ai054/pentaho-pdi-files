@@ -10,6 +10,11 @@
     <directory>/</directory>
     <parameters>
       <parameter>
+        <name>HOST</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
         <name>account</name>
         <default_value/>
         <description/>
@@ -443,7 +448,7 @@
   </notepads>
   <connection>
     <name>hadoop</name>
-    <server>34.239.170.20</server>
+    <server>${HOST}</server>
     <type>HIVE2</type>
     <access>Native</access>
     <database>feeds</database>
@@ -900,6 +905,41 @@
     </GUI>
   </step>
   <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Mysql</connection>
+    <sql>select hac.account_id,data_feed_id, hive_table from h_account_channel hac
+join h_feed_source hfs on  hac.account_id=hfs.account_id
+join d_data_feed ddf on hfs.data_feed_id=ddf.id
+where hac.account_id=? and hac.is_deleted=0 and ddf.type='performance'
+GROUP BY hac.account_id,data_feed_id,hive_table</sql>
+    <limit>0</limit>
+    <lookup>Get Variables</lookup>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>design_query</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -963,41 +1003,6 @@ query=null;
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Mysql</connection>
-    <sql>select hac.account_id,data_feed_id, hive_table from h_account_channel hac
-join h_feed_source hfs on  hac.account_id=hfs.account_id
-join d_data_feed ddf on hfs.data_feed_id=ddf.id
-where hac.account_id=? and hac.is_deleted=0 and ddf.type='performance'
-GROUP BY hac.account_id,data_feed_id,hive_table</sql>
-    <limit>0</limit>
-    <lookup>Get Variables</lookup>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>

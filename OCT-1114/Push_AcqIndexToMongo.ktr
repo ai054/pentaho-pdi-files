@@ -448,7 +448,7 @@
   </notepads>
   <connection>
     <name>hadoop</name>
-    <server>34.239.170.20</server>
+    <server>${HOST}</server>
     <type>HIVE2</type>
     <access>Native</access>
     <database>feeds</database>
