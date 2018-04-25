@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>retention</name>
+  <description/>
+  <extended_description/>
+  <job_version/>
+  <job_status>0</job_status>
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2018/02/01 10:20:28.216</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2018/02/01 10:20:28.216</modified_date>
+  <parameters>
+    <parameter>
+      <name>HOST</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>account</name>
+      <default_value/>
+      <description/>
+    </parameter>
+  </parameters>
+  <connection>
+    <name>hadoop</name>
+    <server>${HOST}</server>
+    <type>HIVE2</type>
+    <access>Native</access>
+    <database>feeds</database>
+    <port>10000</port>
+    <username>hive</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10d69bb9df</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>10000</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <size_limit_lines/>
+    <interval/>
+    <timeout_days/>
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection/>
+    <schema/>
+    <table/>
+    <timeout_days/>
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>112</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>BaseTable</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}/CreateBaseTable_Ret.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>account</name>
+          <stream_name/>
+          <value>${account}</value>
+        </parameter>
+        <parameter>
+          <name>HOST</name>
+          <stream_name/>
+          <value>${HOST}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>288</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>Drop</name>
+      <description/>
+      <type>SQL</type>
+      <sql>drop table if exists acq_base;
+drop table if exists ordered_cust1;
+drop table if exists analytics;
+drop table if exists order_profit;
+drop table if exists order_analytics_idx;
+drop table if exists order_channel;
+drop table if exists total_order_channel;
+drop table if exists orderedCust_deltaltv;
+drop table if exists acq_ret_order;
+drop table if exists mktgspend;
+drop table if exists roas_ret;
+drop table if exists returningorders1;
+drop table if exists ordered_cust2;
+drop table if exists orderedCust_deltaltv1;
+drop table if exists retentionsummary_month;
+drop table if exists ret_cost;
+drop table if exists ret_cost_month;
+drop table if exists channelAnalyticsKPI_ret;
+drop table if exists retention;
+DROP TABLE IF EXISTS Retention_mean_dev;
+drop table if exists SCALE_TEMP1;
+drop table if exists SCALE_TEMP2;
+drop table if exists SCALE_TEMP3;
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>OrderAnalytics</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}/CreateOrderAnalytics.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>HOST</name>
+          <stream_name/>
+          <value>${HOST}</value>
+        </parameter>
+        <parameter>
+          <name>account</name>
+          <stream_name/>
+          <value>${account}</value>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>OrderAnalyticsCreate</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table order_analytics_idx as select a.* ,b.campaign_id,b.adgroup_id,b.campaign_name,b.adgroup_name,b.keyword,b.source,b.medium from order_profit a left join analytics b on a.order_id=b.transaction_id;</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>496</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>Cost</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table mktgspend as 
+select channel,calendar_date,campaign_id,campaign_name,adgroup_id,adgroup_name, sum(kw_clicks)*sum(kw_cpc/1000000) cost from acquisition_base
+group by channel,calendar_date,campaign_id,campaign_name,adgroup_id,adgroup_name;
+
+create table acq_ret_order as 
+select channel, a.trans_date,count( distinct case when rank=1 then a.order_id else null end) acq_order ,count( distinct case when rank &lt;&gt; 1 then a.order_id else null end) ret_order,campaign_id,campaign_name,adgroup_id,adgroup_name from
+(SELECT order_id,trans_date,rank,campaign_id,campaign_name,adgroup_id,adgroup_name FROM order_analytics_idx
+where campaign_name  is NOT NULL and campaign_name &lt;&gt; '(not set)'
+GROUP BY order_id,trans_date,rank,campaign_id,campaign_name,adgroup_id,adgroup_name) a 
+join total_order_channel b on a.order_id=b.order_id
+group by channel, a.trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name;
+
+
+--create  temporary table adgroup_cost as
+--select ct.campaign_id,ct.adgroup_id, channel,calendar_date,sum(acq_order) as acq_order,sum(ret_order) as ret_order,sum((cost/(acq_order+ret_order))*acq_order) acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost,sum(cost) as cost
+--from(select campaign_id,adgroup_id,campaign_name,from_unixtime(unix_timestamp(trans_date,'yyyy-MM-dd'),'yyyy-MM-dd') trans_date,sum(if(rank=1,1,0)) acq_order,sum(if(rank &lt;&gt; 1,1,0)) ret_order from order_analytics where transaction_id is not null and campaign_id &lt;&gt; '(not set)'
+--group by campaign_id,adgroup_id,campaign_name,trans_date) oc
+--join (select channel,calendar_date,campaign_id,adgroup_id,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from acq_base
+--group by channel,calendar_date,campaign_id,adgroup_id) ct on oc.campaign_id=ct.campaign_id and oc.adgroup_id=ct.adgroup_id and oc.trans_date=ct.calendar_date
+--group by ct.campaign_id,ct.adgroup_id, ct.channel,ct.calendar_date;
+
+create table ret_cost as 
+select a.channel,a.trans_date , avg (retcpo+cost_adjust) as cpo from
+(select channel,trans_date ,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
+(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
+join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
+group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
+group by channel,trans_date) a
+
+left join (select a.channel,a.calendar_date,avg(cost/acq_order+ret_order) as cost_adjust from
+(select a.channel,calendar_date, sum(cost) cost from mktgspend a
+left join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
+where b.campaign_name is null
+group by a.channel,calendar_date) a
+join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order from acq_ret_order
+group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
+group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
+group by a.channel,a.trans_date;
+
+create table ret_cost_month as 
+select channel,month(trans_date) as month, year(trans_date) as year,avg(cpo) as cpo from ret_cost
+group by channel,month(trans_date) , year(trans_date);
+
+
+create table roas_ret as
+select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(sum(revenue)/if(sum(cost)=0,1,sum(cost)),2)*100 as roas from (
+select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from order_analytics_idx  oai
+ join total_order_channel toc on oai.order_id=toc.order_id
+join acquisition_base ab on oai.campaign_id=ab.campaign_id and oai.adgroup_id=ab.adgroup_id and oai.trans_date=ab.calendar_date
+where oai.rank &lt;&gt; 1
+group by toc.channel,oai.trans_date
+union
+select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from (select order_id,trans_date,revenue,campaign_name from order_analytics_idx where campaign_id ='(not set)' and campaign_name &lt;&gt; '(not set)' and rank &lt;&gt;1) oai
+ join total_order_channel toc on oai.order_id=toc.order_id
+join acquisition_base ab on oai.campaign_name=ab.campaign_name and  oai.trans_date=ab.calendar_date
+group by toc.channel,oai.trans_date) roas
+group by channel, month(trans_date) ,year(trans_date) ;
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>OrderChannel</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table order_channel as
+select order_id, customer_id,trans_date,channel from order_analytics_idx a  
+join campaigntype${account} b on a.campaign_id=b.campaign_id
+union
+select a.order_id,customer_id,trans_date, b.channel from 
+(select order_id ,customer_id,trans_date,campaign_id,campaign_name from order_analytics_idx where campaign_id='(not set)' and campaign_name &lt;&gt; '(not set)') a
+join campaigntype${account} b on lower(a.campaign_name)=lower(b.campaign_name);
+
+create table total_order_channel as 
+select  a.order_id,a.customer_id,a.trans_date, coalesce(coalesce(channel,case when medium='cpc' then concat(source,'-','medium') else medium end),'offline') as channel from order_analytics_idx a  
+left join order_channel b on a.order_id=b.order_id;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>channelAnalytics</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table channelAnalyticsKPI_ret as
+SELECT date_add(a.trans_date, 1-day(a.trans_date)+1) trans_date,month(a.trans_date) as month_of_year,year(a.trans_date) as year,channel,count(DISTINCT case when rank &lt;&gt; 1 then  a.order_id else null end ) as NumOrder, count(DISTINCT case when rank &lt;&gt; 1 then  a.customer_id else null end) TotalUniqueCustomer,sum(if(rank &lt;&gt; 1,profit,0)) profit,
+sum(if(rank &lt;&gt; 1,revenue,0)) revenue FROM (select order_id, trans_date,customer_id,rank,profit,revenue from order_analytics_idx GROUP BY order_id, trans_date,customer_id,rank,profit,revenue) a  
+JOIN total_order_channel b on a.order_id=b.order_id
+GROUP BY date_add(a.trans_date, 1-day(a.trans_date)+1),month(a.trans_date),year(a.trans_date),channel;
+</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>688</xloc>
+      <yloc>96</yloc>
+    </entry>
+    <entry>
+      <name>ChannelMap</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}/hChannelMap.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>account</name>
+          <stream_name/>
+          <value/>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>720</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>Ret_mean_dev</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table retention as
+select rsm.month_of_year,rsm.year_int as year,(INT((MONTH(concat(rsm.year_int,'-',rsm.month_of_year,'-','02'))-1)/3)+1) quarter,rsm.channel,numcustlost,numcustactive,numcustinactive,numcustreactive,numuniquecustomers,regain,lostpot,delta_ltv,cpo,
+cr.numorder as numorder,cr.totaluniquecustomer as totaluniquecustomer,coalesce(cr.profit,0)  as profit,coalesce(cr.revenue,0) as revenue,coalesce(rrt.roas,0) as roas
+from retentionsummary_month rsm
+left join ret_cost_month rcm on rsm.channel=rcm.channel and rsm.month_of_year=rcm.month and rsm.year_int=rcm.year
+left join channelanalyticskpi_ret cr on rsm.channel=cr.channel and rsm.month_of_year=cr.month_of_year and rsm.year_int=cr.year
+left join roas_ret rrt on rsm.month_of_year=rrt.month_of_year and rsm.year_int=rrt.year_int and rsm.channel=rrt.channel;
+
+CREATE  TABLE SCALE_TEMP1 AS 
+SELECT channel,
+SUM(numcustlost) AS NUMCUSTLOST,
+SUM(numcustactive) AS PERCCUSTACTIVE,
+SUM(numcustinactive) AS PERCCUSTINACTIVE,
+SUM(numcustreactive) AS NUMCUSTREACTIVE,
+SUM(PROFIT) AS TOTALPROFIT,
+SUM(numorder) as NUMORDERS,
+SUM(revenue) AS TOTALREVENUE,
+SUM(numuniquecustomers) AS NUMUNIQUECUSTOMERS,
+SUM(regain) as LTVREGAINED,
+SUM(lostpot) AS LOSTPOTENTIAL,
+SUM(delta_ltv) AS DELTALTV,
+sum(roas) as ROAS,
+avg(cpo) as CPO
+--sum(totalcost) as TOTALCOST
+FROM retention GROUP BY channel,year,month_of_year;
+
+CREATE  TABLE SCALE_TEMP2 AS 
+SELECT channel,
+SUM(numcustlost) AS NUMCUSTLOST,
+SUM(numcustactive) AS PERCCUSTACTIVE,
+SUM(numcustinactive) AS PERCCUSTINACTIVE,
+SUM(numcustreactive) AS NUMCUSTREACTIVE,
+SUM(PROFIT) AS TOTALPROFIT,
+SUM(numorder) as NUMORDERS,
+SUM(revenue) AS TOTALREVENUE,
+SUM(numuniquecustomers) AS NUMUNIQUECUSTOMERS,
+SUM(regain) as LTVREGAINED,
+SUM(lostpot) AS LOSTPOTENTIAL,
+SUM(delta_ltv) AS DELTALTV,
+sum(roas) as ROAS,
+avg(cpo) as CPO
+--sum(totalcost) as TOTALCOST
+FROM retention GROUP BY channel,YEAR,quarter;
+
+CREATE  TABLE SCALE_TEMP3 AS 
+SELECT channel,
+SUM(numcustlost) AS NUMCUSTLOST,
+SUM(numcustactive) AS PERCCUSTACTIVE,
+SUM(numcustinactive) AS PERCCUSTINACTIVE,
+SUM(numcustreactive) AS NUMCUSTREACTIVE,
+SUM(PROFIT) AS TOTALPROFIT,
+SUM(numorder) as NUMORDERS,
+SUM(revenue) AS TOTALREVENUE,
+SUM(numuniquecustomers) AS NUMUNIQUECUSTOMERS,
+SUM(regain) as LTVREGAINED,
+SUM(lostpot) AS LOSTPOTENTIAL,
+SUM(delta_ltv) AS DELTALTV,
+sum(roas) as ROAS,
+avg(cpo) as CPO
+--sum(totalcost) as TOTALCOST
+FROM retention GROUP BY channel,YEAR;
+
+CREATE TABLE Retention_mean_dev (CHANNEL STRING,WINDOW_SIZE STRING, SUM_TOTALREVENUE DOUBLE  ,SUM_OF_SQUARE_TOTALREVENUE DOUBLE, NUM_TOTALREVENUE INT, SUM_NUMORDERS BIGINT  ,SUM_OF_SQUARE_NUMORDERS BIGINT, NUM_NUMORDERS INT, SUM_NUMUNIQUECUSTOMERS BIGINT  ,SUM_OF_SQUARE_NUMUNIQUECUSTOMERS BIGINT , NUM_NUMUNIQUECUSTOMERS INT, SUM_TOTALPROFIT DOUBLE  ,SUM_OF_SQUARE_TOTALPROFIT DOUBLE , NUM_TOTALPROFIT  INT, SUM_CPO DOUBLE  ,SUM_OF_SQUARE_CPO DOUBLE , NUM_CPO  INT, SUM_PERCCUSTINACTIVE DOUBLE  ,SUM_OF_SQUARE_PERCCUSTINACTIVE DOUBLE ,  NUM_PERCCUSTINACTIVE  INT,SUM_PERCCUSTACTIVE DOUBLE  , SUM_OF_SQUARE_PERCCUSTACTIVE DOUBLE, NUM_PERCCUSTACTIVE INT, SUM_NUMCUSTLOST DOUBLE,SUM_OF_SQUARE_NUMCUSTLOST DOUBLE, NUM_NUMCUSTLOST INT, SUM_LTVREGAINED DOUBLE  ,SUM_OF_SQUARE_LTVREGAINED DOUBLE , NUM_LTVREGAINED INT, SUM_DELTALTV DOUBLE  ,SUM_OF_SQUARE_DELTALTV DOUBLE , NUM_DELTALTV INT, SUM_LOSTPOTENTIAL DOUBLE  ,SUM_OF_SQUARE_LOSTPOTENTIAL DOUBLE , NUM_LOSTPOTENTIAL INT ,SUM_NUMCUSTREACTIVE DOUBLE  ,SUM_OF_SQUARE_NUMCUSTREACTIVE DOUBLE , NUM_NUMCUSTREACTIVE INT,SUM_ROAS DOUBLE  ,SUM_OF_SQUARE_ROAS DOUBLE , NUM_ROAS INT
+--,SUM_MKTGCOST DOUBLE ,SUM_OF_SQUARE_MKTGCOST DOUBLE, NUM_MKTGCOST INT
+);
+
+INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"MONTHLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
+--, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+FROM SCALE_TEMP1 GROUP BY CHANNEL;
+INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"QUARTERLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
+--, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+FROM SCALE_TEMP2 GROUP BY CHANNEL;
+INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"YEARLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
+--, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+FROM SCALE_TEMP3 GROUP BY CHANNEL;
+
+
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>PushDataMongo</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}/Push_RetIndexToMongo.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>HOST</name>
+          <stream_name/>
+          <value/>
+        </parameter>
+        <parameter>
+          <name>account</name>
+          <stream_name/>
+          <value/>
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
+    </entry>
+    <entry>
+      <name>Predictive KPI</name>
+      <description/>
+      <type>SQL</type>
+      <sql>create table returningOrders1 as
+select b.customer_id,date_format(b.transdate,'yyyy-MM-dd') as transdate,a.channel, sum(if(cast(b.order_rank as int) &lt;&gt; 1,b.cum_profit,0)) as hist_profit-- ,sum(b.hist_profit) as hist_profit
+from total_order_channel a
+-- join ordered_cust b on b.start_date= date_add(a.transdate, 1-day(a.transdate)+1)
+right join trans_profile_pivot${account} b on a.customer_id = b.customer_id and date_format(a.trans_date,'yyyy-MM-dd') = date_format(b.transdate,'yyyy-MM-dd')
+where cast(b.order_rank  as int)!= 1  
+group by b.customer_id,b.transdate,a.channel;
+
+
+CREATE TABLE ordered_cust2 as 
+select * from
+(SELECT b.customer_id,b.start_date, a.channel,
+   sum(a.hist_profit)  as hist_profit,
+   --sum(b.profit) as hist_profit2,
+  if(a.customer_id is not null ,'Yes','No') as ordered_flag
+FROM 
+  -- (select customer_id, transdate, cum_profit from trans_profile_pivot2 where order_rank != 1) a
+returningOrders1 a 
+right JOIN retention_input${account} b ON a.customer_id = b.customer_id
+  AND month(b.start_date) =month(transdate)
+GROUP BY b.customer_id,b.start_date,if(a.customer_id is not null ,'Yes','No')
+,a.channel) b ;
+
+
+create table orderedCust_deltaltv1 as
+select a.start_date as start_date, a.channel,b.customer_id, ordered_flag,
+ltv as expectedprofit, --  sum(expectedprofit) as expectedprofit, 
+hist_profit, 
+-- sum(hist_profit) as hist_profit,
+lag(hist_profit, 1) over (partition by b.customer_id order by b.start_date asc) as prev_hist_profit, 
+-- sum(lag(expectedprofit, 1) over (PARTITION BY b.customer_id, a.channel order by b.start_dateasc)) as prev_expectedprofit,
+lag(ltv, 1) over (PARTITION BY b.customer_id order by b.start_date asc) as prev_expectedprofit,
+is_active as cur_status, 
+lag(is_active, 1) over (partition by b.customer_id order by b.start_date asc) as prev_status
+from ordered_cust2 a
+right join retention_input${account} b on a.customer_id = b.customer_id and a.start_date = b.start_date;
+
+
+create table retentionsummary_month as
+SELECT year(start_date) year_INT,
+   month(start_date)  month_of_year, channel,
+   COUNT(*) - SUM(IF(prev_status = 0, 1, 0)) AS numCustLost,
+   COUNT(DISTINCT customer_id) AS numUniqueCustomers,
+   COUNT(DISTINCT CASE
+           WHEN cur_status = 0  THEN customer_id
+       END) as numCustInactive,
+   COUNT(DISTINCT CASE
+           WHEN cur_status = 1 THEN customer_id
+       END) as numCustActive,
+       count( Distinct case
+         when prev_status=0 and cur_status=1 and channel is not null then customer_id end) as numCustReactive,
+sum( -- Ordered : turns active from inactive
+case when prev_status  = 0 and cur_status = 1 and lower(ordered_flag) = "yes" then expectedprofit - prev_expectedprofit
+else 0
+   end) as regain,
+sum( -- Ordered : turns inactive from active
+case when prev_status  =  1 and cur_status = 0 and lower(ordered_flag)="yes" then prev_hist_profit - prev_expectedprofit
+else 0
+   end) as lostPot, 
+sum(case -- Unordered: Active remains active
+when prev_status=1 and cur_status =1 and lower(ordered_flag) ="no" then expectedprofit - prev_expectedprofit 
+   else 0
+   end) as delta_ltv
+FROM orderedCust_deltaltv1 
+GROUP BY year(start_date),month(start_date), channel;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>hadoop</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>784</xloc>
+      <yloc>96</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>START</from>
+      <to>Drop</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Drop</from>
+      <to>BaseTable</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>OrderAnalytics</from>
+      <to>OrderAnalyticsCreate</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>OrderAnalyticsCreate</from>
+      <to>OrderChannel</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>OrderChannel</from>
+      <to>channelAnalytics</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>PushDataMongo</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>BaseTable</from>
+      <to>OrderAnalytics</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>channelAnalytics</from>
+      <to>Predictive KPI</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Predictive KPI</from>
+      <to>Cost</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Cost</from>
+      <to>Ret_mean_dev</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Ret_mean_dev</from>
+      <to>ChannelMap</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>ChannelMap</from>
+      <to>PushDataMongo</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes>
+    <group>
+      <name>METASTORE.NamedClusters</name>
+      <attribute>
+        <key>NamedCluster</key>
+        <value>{"namespace":"NamedClusters","id":"NamedCluster","name":"NamedCluster","description":"A NamedCluster","metaStoreName":null}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>METASTORE.pentaho</name>
+      <attribute>
+        <key>Default Run Configuration</key>
+        <value>{"namespace":"pentaho","id":"Default Run Configuration","name":"Default Run Configuration","description":"Defines a default run configuration","metaStoreName":null}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>{"_":"Embedded MetaStore Elements","namespace":"NamedClusters","type":"NamedCluster"}</name>
+      <attribute>
+        <key>hadoop</key>
+        <value>{"children":[{"children":[],"id":"hdfsPassword","value":null},{"children":[],"id":"oozieUrl","value":"http://node-01.algo:8080/oozie"},{"children":[],"id":"mapr","value":"N"},{"children":[],"id":"useGateway","value":"N"},{"children":[],"id":"lastModifiedDate","value":"1500013133689"},{"children":[],"id":"jobTrackerHost","value":"node-01.algo"},{"children":[],"id":"zooKeeperHost","value":"node-01.algo"},{"children":[],"id":"shimIdentifier","value":null},{"children":[],"id":"gatewayUrl","value":null},{"children":[],"id":"jobTrackerPort","value":"8050"},{"children":[],"id":"zooKeeperPort","value":"2181"},{"children":[],"id":"name","value":"hadoop"},{"children":[],"id":"hdfsPort","value":"8020"},{"children":[],"id":"hdfsUsername","value":"TD054"},{"children":[],"id":"gatewayPassword","value":null},{"children":[],"id":"kafkaBootstrapServers","value":null},{"children":[],"id":"storageScheme","value":"hdfs"},{"children":[],"id":"hdfsHost","value":"node-01.algo"},{"children":[],"id":"gatewayUsername","value":null}],"id":"hadoop","value":null,"name":"hadoop","owner":null,"ownerPermissionsList":[]}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
+      <attribute>
+        <key>Pentaho local</key>
+        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"pentaho","value":"N"},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
+      </attribute>
+    </group>
+  </attributes>
+</job>
