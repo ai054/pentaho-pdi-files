@@ -422,12 +422,12 @@
 SELECT account_id, channel,calendar_date,
 sum(kw_imps) as num_imps, 
 sum(kw_clicks) AS num_clicks, 
-sum(kw_clicks)/sum(kw_imps)*100 as ctr, 
+round(sum(kw_clicks)/sum(kw_imps),2)*100 as ctr, 
 sum(kw_conv)/sum(kw_clicks) as conv_rate, 
 sum(kw_conv) AS conv,
 --sum(convratemanyperclick) AS manyConv,
 sum(kw_clicks*(kw_cpc/1000000))/sum(kw_clicks) as avg_cpc, 
-sum(kw_clicks*(kw_cpc/1000000)) as totalCost,
+--sum(kw_clicks*(kw_cpc/1000000)) as totalCost,
 sum(totalconvvalue) as totalRevenue
 --avg(avg_position) as position,
 --avg(quality_score) as avg_quality_score
@@ -460,7 +460,7 @@ drop table if exists ltv_idx;
 drop table if exists acq_ret_order;
 drop table if exists mktgspend;
 drop table if exists channelAnalyticsKPI;
-drop table if exists acq_cost;
+drop table if exists mktg_cost;
 drop table if exists channelAnalyticsKPI_acq;
 drop table if exists acquisition;
 DROP TABLE IF EXISTS Acquisition_mean_dev;
@@ -559,6 +559,24 @@ GROUP BY order_id,trans_date,rank,campaign_id,campaign_name,adgroup_id,adgroup_n
 join total_order_channel b on a.order_id=b.order_id
 group by channel, trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name;
 
+create table mktg_cost as 
+select a.channel,a.trans_date ,sum(a.cost+coalesce(c.cost,0))as cost,sum((acqcpo+coalesce(cost_adjust,0))*acq_order) as acqmktgspend,sum((retcpo+coalesce(cost_adjust_ret,0))*ret_order) as retmktgspend ,avg(acqcpo+coalesce(cost_adjust,0)) as acqcpo,avg(retcpo+coalesce(cost_adjust_ret,0)) retcpo from
+(select channel,trans_date ,sum(cost) as cost,sum(acq_order) acq_order,sum(ret_order) as ret_order,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
+(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(cost) as cost,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
+join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
+group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
+group by channel,trans_date) a
+
+left join (select a.channel,a.calendar_date,sum(a.cost) as cost,coalesce(avg(cost*acq_perc),0) as cost_adjust,coalesce(avg(cost*ret_perc),0) as cost_adjust_ret from
+(select a.channel,calendar_date, sum(cost) cost from mktgspend a
+join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
+where b.campaign_name is null
+group by a.channel,calendar_date) a
+join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order,(sum(acq_order)/(sum(acq_order)+sum(ret_order))) as acq_perc,(sum(ret_order)/(sum(acq_order)+sum(ret_order))) as ret_perc from acq_ret_order
+group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
+group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
+group by a.channel,a.trans_date;
+
 
 --create  temporary table adgroup_cost as
 --select ct.campaign_id,ct.adgroup_id, channel,calendar_date,sum(acq_order) as acq_order,sum(ret_order) as ret_order,sum((cost/(acq_order+ret_order))*acq_order) acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost,sum(cost) as cost
@@ -568,23 +586,23 @@ group by channel, trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name;
 --group by channel,calendar_date,campaign_id,adgroup_id) ct on oc.campaign_id=ct.campaign_id and oc.adgroup_id=ct.adgroup_id and oc.trans_date=ct.calendar_date
 --group by ct.campaign_id,ct.adgroup_id, ct.channel,ct.calendar_date;
 
-create table acq_cost as 
-select a.channel,a.trans_date , avg (acqcpo+cost_adjust) as cpo from
-(select channel,trans_date ,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
-(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
-join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
-group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
-group by channel,trans_date) a
+--create table acq_cost as 
+--select a.channel,a.trans_date ,sum((acqcpo+cost_adjust)*acq_order) ,avg(acqcpo+cost_adjust) as cpo from
+--(select channel,trans_date ,sum(acq_order) acq_order,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
+--(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
+--join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
+--group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
+--group by channel,trans_date) a
 
-left join (select a.channel,a.calendar_date,avg(cost/acq_order+ret_order) as cost_adjust from
-(select a.channel,calendar_date, sum(cost) cost from mktgspend a
-left join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
-where b.campaign_name is null
-group by a.channel,calendar_date) a
-join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order from acq_ret_order
-group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
-group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
-group by a.channel,a.trans_date</sql>
+--left join (select a.channel,a.calendar_date,avg(cost/acq_order+ret_order) as cost_adjust from
+--(select a.channel,calendar_date, sum(cost) cost from mktgspend a
+--left join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
+--where b.campaign_name is null
+--group by a.channel,calendar_date) a
+--join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order from acq_ret_order
+--group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
+--group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
+--group by a.channel,a.trans_date</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
@@ -627,7 +645,7 @@ left join order_channel b on a.order_id=b.order_id;</sql>
       <description/>
       <type>SQL</type>
       <sql>create table channelAnalyticsKPI_acq as
-SELECT trans_date,channel,count(DISTINCT a.order_id) as NumOrder, count(DISTINCT case when rank=1 then  customer_id else null end) TotalUniqueCustomer,sum(if(rank=1,profit,0)) profit,
+SELECT trans_date,channel,count(DISTINCT case when rank=1 then a.order_id else null end) as NumOrder, count(DISTINCT case when rank=1 then  customer_id else null end) TotalUniqueCustomer,sum(if(rank=1,profit,0)) profit,
 sum(if(rank=1,revenue,0)) revenue FROM (select order_id, trans_date,customer_id,rank,profit,revenue from order_analytics_idx GROUP BY order_id, trans_date,customer_id,rank,profit,revenue) a  
 JOIN total_order_channel b on a.order_id=b.order_id
 GROUP BY trans_date,channel;
@@ -701,9 +719,9 @@ group by cc.channel,cc.start_date;</sql>
 select coalesce(a.channel,b.channel) as channel,cast(coalesce(a.trans_date,b.calendar_date) as date) as calendar_date,year(coalesce(a.trans_date,b.calendar_date)) year,month(coalesce(a.trans_date,b.calendar_date)) monthofyear,
 (INT((MONTH(coalesce(a.trans_date,b.calendar_date))-1)/3)+1) quarter,weekofyear(coalesce(a.trans_date,b.calendar_date)) weekofyear,
 coalesce(a.numorder,0) NUMORDERS,coalesce(a.totaluniquecustomer,0) TOTALNEWCUSTOMERS,coalesce(a.profit,0) PROFIT ,coalesce(a.revenue,0) TOTALREVENUE ,coalesce(b.num_imps,0) NUM_IMPS,coalesce(b.num_clicks,0) NUM_CLICKS, d.ltv ltv,
-coalesce(b.ctr,0) CTR,coalesce(b.conv_rate,0) conv_rate,coalesce(b.avg_cpc,0) avg_cpc, coalesce(b.conv,0) conv,coalesce(b.totalcost,0) totalcost, coalesce(c.cpo,0) CPO, coalesce(revenue/if(coalesce(b.totalcost,0)=0,1,b.totalcost),0) ROAS from channelanalyticskpi_acq a  
+coalesce(b.ctr,0) CTR,coalesce(b.conv_rate,0) conv_rate,coalesce(b.avg_cpc,0) avg_cpc, coalesce(b.conv,0) conv,coalesce(c.acqmktgspend,0) totalcost, coalesce(c.acqcpo,0) CPO, coalesce(revenue/if(coalesce(c.acqmktgspend,0)=0,1,c.acqmktgspend),0) ROAS from channelanalyticskpi_acq a  
 full join channelkpi3 b on a.channel=b.channel and a.trans_date=b.calendar_date
-left join acq_cost c on a.channel=c.channel and a.trans_date=c.trans_date
+left join mktg_cost c on a.channel=c.channel and a.trans_date=c.trans_date
 left join ltv_idx d on a.channel=d.channel and month(cast(coalesce(a.trans_date,b.calendar_date) as date))=month(d.start_date) and year(cast(coalesce(a.trans_date,b.calendar_date) as date))=year(d.start_date) ;
 
 
@@ -838,7 +856,7 @@ FROM SCALE_TEMP5 GROUP BY CHANNEL;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>784</xloc>
-      <yloc>192</yloc>
+      <yloc>176</yloc>
     </entry>
     <entry>
       <name>PushDataMongo</name>

@@ -1950,9 +1950,9 @@
     <sql>select coalesce(a.channel,b.channel) as channel,cast(coalesce(a.trans_date,b.calendar_date) as date) as calendar_date,year(coalesce(a.trans_date,b.calendar_date)) year,month(coalesce(a.trans_date,b.calendar_date)) monthofyear,
 (INT((MONTH(coalesce(a.trans_date,b.calendar_date))-1)/3)+1) quarter,weekofyear(coalesce(a.trans_date,b.calendar_date)) weekofyear,
 a.numorder,a.totaluniquecustomer,a.profit,a.revenue ,b.num_imps num_imps,b.num_clicks,d.ltv,
-b.ctr,b.conv_rate,b.avg_cpc, b.totalcost,b.conv, c.cpo, revenue/if(coalesce(b.totalcost,0)=0,1,b.totalcost) roas from channelanalyticskpi_acq a  
+b.ctr,b.conv_rate,b.avg_cpc, round(c.acqmktgspend,2) as totalcost,b.conv, round(c.acqcpo,2) as cpo, revenue/if(coalesce(c.acqmktgspend,0)=0,1,c.acqmktgspend) roas from channelanalyticskpi_acq a  
 full join channelkpi3 b on a.channel=b.channel and a.trans_date=b.calendar_date
-left join acq_cost c on a.channel=c.channel and a.trans_date=c.trans_date
+left join mktg_cost c on a.channel=c.channel and a.trans_date=c.trans_date
 left join (select channel,start_date, avg(ltv) ltv from ltv_idx group by channel,start_date) d on a.channel=d.channel and month(cast(coalesce(a.trans_date,b.calendar_date) as date))=month(d.start_date) and year(cast(coalesce(a.trans_date,b.calendar_date) as date))=year(d.start_date)
 </sql>
     <limit>0</limit>
