@@ -695,7 +695,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SUARE_TOTALCOST</incoming_field_name>
@@ -705,7 +705,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_TOTALCOST</incoming_field_name>
@@ -715,7 +715,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_TOTALREVENUE</incoming_field_name>
@@ -725,7 +725,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_TOTALREVENUE</incoming_field_name>
@@ -735,7 +735,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_TOTALREVENUE</incoming_field_name>
@@ -745,7 +745,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_NUMORDERS</incoming_field_name>
@@ -755,7 +755,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_NUMORDERS</incoming_field_name>
@@ -765,7 +765,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_NUMORDERS</incoming_field_name>
@@ -775,7 +775,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_TOTALNEWCUSTOMERS</incoming_field_name>
@@ -785,7 +785,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_TOTALNEWCUSTOMERS</incoming_field_name>
@@ -795,7 +795,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_TOTALNEWCUSTOMERS</incoming_field_name>
@@ -805,7 +805,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_PROFIT</incoming_field_name>
@@ -815,7 +815,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_PROFIT</incoming_field_name>
@@ -825,7 +825,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_PROFIT</incoming_field_name>
@@ -835,7 +835,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_NUM_IMPS</incoming_field_name>
@@ -845,7 +845,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_NUM_IMPS</incoming_field_name>
@@ -855,7 +855,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_NUM_IMPS</incoming_field_name>
@@ -865,7 +865,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_NUM_CLICKS</incoming_field_name>
@@ -875,7 +875,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_NUM_CLICKS</incoming_field_name>
@@ -885,7 +885,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_NUM_CLICKS</incoming_field_name>
@@ -895,7 +895,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_CTR</incoming_field_name>
@@ -905,7 +905,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_CTR</incoming_field_name>
@@ -915,7 +915,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_CTR</incoming_field_name>
@@ -925,7 +925,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_CONV_RATE</incoming_field_name>
@@ -935,7 +935,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_CONV_RATE</incoming_field_name>
@@ -945,7 +945,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_CONV_RATE</incoming_field_name>
@@ -955,7 +955,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_CONV</incoming_field_name>
@@ -965,7 +965,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_CONV</incoming_field_name>
@@ -975,7 +975,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_CONV</incoming_field_name>
@@ -985,7 +985,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_AVG_CPC</incoming_field_name>
@@ -995,7 +995,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_AVG_CPC</incoming_field_name>
@@ -1005,7 +1005,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_AVG_CPC</incoming_field_name>
@@ -1015,7 +1015,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_ROAS</incoming_field_name>
@@ -1025,7 +1025,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_ROAS</incoming_field_name>
@@ -1035,7 +1035,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_ROAS</incoming_field_name>
@@ -1045,7 +1045,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_CPO</incoming_field_name>
@@ -1055,7 +1055,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_CPO</incoming_field_name>
@@ -1065,7 +1065,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_CPO</incoming_field_name>
@@ -1075,7 +1075,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_LTV</incoming_field_name>
@@ -1085,7 +1085,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>SUM_OF_SQUARE_LTV</incoming_field_name>
@@ -1095,7 +1095,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_LTV</incoming_field_name>
@@ -1105,7 +1105,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
     </mongo_fields>
     <cluster_schema/>
@@ -1292,7 +1292,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>TOTALNEWCUSTOMERS</incoming_field_name>
@@ -1302,7 +1302,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>PROFIT</incoming_field_name>
@@ -1312,7 +1312,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>TOTALREVENUE</incoming_field_name>
@@ -1322,7 +1322,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_IMPS</incoming_field_name>
@@ -1332,7 +1332,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>NUM_CLICKS</incoming_field_name>
@@ -1342,7 +1342,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>CTR</incoming_field_name>
@@ -1352,7 +1352,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>CONV_RATE</incoming_field_name>
@@ -1362,7 +1362,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>AVG_CPC</incoming_field_name>
@@ -1372,7 +1372,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>LTV</incoming_field_name>
@@ -1382,7 +1382,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>MKTGSPEND</incoming_field_name>
@@ -1392,7 +1392,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>CPO</incoming_field_name>
@@ -1402,7 +1402,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>ROAS</incoming_field_name>
@@ -1412,7 +1412,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>CONV</incoming_field_name>
@@ -1422,7 +1422,7 @@
         <modifier_update_operation>N/A</modifier_update_operation>
         <modifier_policy>Insert&amp;Update</modifier_policy>
         <json_field>N</json_field>
-        <allow_null>N</allow_null>
+        <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
         <incoming_field_name>CALENDAR_DATE</incoming_field_name>
