@@ -1077,6 +1077,36 @@
         <json_field>N</json_field>
         <allow_null>N</allow_null>
       </mongo_field>
+      <mongo_field>
+        <incoming_field_name>SUM_MKTGSPEND</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>N</allow_null>
+      </mongo_field>
+      <mongo_field>
+        <incoming_field_name>SUM_OF_SQUARE_MKTGSPEND</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>N</allow_null>
+      </mongo_field>
+      <mongo_field>
+        <incoming_field_name>NUM_MKTGSPEND</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>N</allow_null>
+      </mongo_field>
     </mongo_fields>
     <cluster_schema/>
     <remotesteps>
@@ -1345,6 +1375,16 @@
         <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
+        <incoming_field_name>MKTGSPEND</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>Y</allow_null>
+      </mongo_field>
+      <mongo_field>
         <incoming_field_name>NUMORDERS</incoming_field_name>
         <mongo_doc_path/>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
@@ -1489,6 +1529,10 @@
       <field>
         <name>delta_ltv</name>
         <rename>DELTALTV</rename>
+      </field>
+      <field>
+        <name>totalcost</name>
+        <rename>MKTGSPEND</rename>
       </field>
       <field>
         <name>cpo</name>
@@ -1768,6 +1812,18 @@
         <name>num_roas</name>
         <rename>NUM_ROAS</rename>
       </field>
+      <field>
+        <name>sum_mktgspend</name>
+        <rename>SUM_MKTGSPEND</rename>
+      </field>
+      <field>
+        <name>sum_of_square_mktgspend</name>
+        <rename>SUM_OF_SQUARE_MKTGSPEND</rename>
+      </field>
+      <field>
+        <name>num_mktgspend</name>
+        <rename>NUM_MKTGSPEND</rename>
+      </field>
       <select_unspecified>N</select_unspecified>
     </fields>
     <cluster_schema/>
@@ -1897,6 +1953,7 @@
 , profit
 , revenue
 , roas
+, totalcost
 FROM retention
 </sql>
     <limit>0</limit>
@@ -1971,6 +2028,9 @@ FROM retention
 , sum_roas
 , sum_of_square_roas
 , num_roas
+, sum_mktgspend
+, sum_of_square_mktgspend
+, num_mktgspend
 FROM retention_mean_dev
 </sql>
     <limit>0</limit>

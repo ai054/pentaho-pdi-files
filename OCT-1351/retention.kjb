@@ -441,6 +441,7 @@ DROP TABLE IF EXISTS Retention_mean_dev;
 drop table if exists SCALE_TEMP1;
 drop table if exists SCALE_TEMP2;
 drop table if exists SCALE_TEMP3;
+drop table if exists mktg_cost;
 
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
@@ -541,42 +542,65 @@ group by channel, a.trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name
 --group by channel,calendar_date,campaign_id,adgroup_id) ct on oc.campaign_id=ct.campaign_id and oc.adgroup_id=ct.adgroup_id and oc.trans_date=ct.calendar_date
 --group by ct.campaign_id,ct.adgroup_id, ct.channel,ct.calendar_date;
 
-create table ret_cost as 
-select a.channel,a.trans_date , avg (retcpo+cost_adjust) as cpo from
-(select channel,trans_date ,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
-(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
-join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
-group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
-group by channel,trans_date) a
+--create table ret_cost as 
+--select a.channel,a.trans_date , avg (retcpo+cost_adjust) as cpo from
+--(select channel,trans_date ,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
+--(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
+--join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
+--group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
+--group by channel,trans_date) a
 
-left join (select a.channel,a.calendar_date,avg(cost/acq_order+ret_order) as cost_adjust from
-(select a.channel,calendar_date, sum(cost) cost from mktgspend a
-left join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
-where b.campaign_name is null
-group by a.channel,calendar_date) a
-join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order from acq_ret_order
-group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
-group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
-group by a.channel,a.trans_date;
+--left join (select a.channel,a.calendar_date,avg(cost/acq_order+ret_order) as cost_adjust from
+--(select a.channel,calendar_date, sum(cost) cost from mktgspend a
+--left join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
+--where b.campaign_name is null
+--group by a.channel,calendar_date) a
+--join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order from acq_ret_order
+--group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
+--group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
+--group by a.channel,a.trans_date;
 
-create table ret_cost_month as 
-select channel,month(trans_date) as month, year(trans_date) as year,avg(cpo) as cpo from ret_cost
-group by channel,month(trans_date) , year(trans_date);
+---create table ret_cost_month as 
+--select channel,month(trans_date) as month, year(trans_date) as year,avg(cpo) as cpo from ret_cost
+--group by channel,month(trans_date) , year(trans_date);
 
 
 create table roas_ret as
 select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(sum(revenue)/if(sum(cost)=0,1,sum(cost)),2)*100 as roas from (
 select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from order_analytics_idx  oai
- join total_order_channel toc on oai.order_id=toc.order_id
+join total_order_channel toc on oai.order_id=toc.order_id
 join acquisition_base ab on oai.campaign_id=ab.campaign_id and oai.adgroup_id=ab.adgroup_id and oai.trans_date=ab.calendar_date
 where oai.rank &lt;&gt; 1
 group by toc.channel,oai.trans_date
 union
 select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from (select order_id,trans_date,revenue,campaign_name from order_analytics_idx where campaign_id ='(not set)' and campaign_name &lt;&gt; '(not set)' and rank &lt;&gt;1) oai
- join total_order_channel toc on oai.order_id=toc.order_id
+join total_order_channel toc on oai.order_id=toc.order_id
 join acquisition_base ab on oai.campaign_name=ab.campaign_name and  oai.trans_date=ab.calendar_date
 group by toc.channel,oai.trans_date) roas
 group by channel, month(trans_date) ,year(trans_date) ;
+
+
+create table mktg_cost as 
+select a.channel,a.trans_date ,sum(a.cost+coalesce(c.cost,0))as cost,sum((acqcpo+coalesce(cost_adjust,0))*acq_order) as acqmktgspend,sum((retcpo+coalesce(cost_adjust_ret,0))*ret_order) as retmktgspend ,avg(acqcpo+coalesce(cost_adjust,0)) as acqcpo,avg(retcpo+coalesce(cost_adjust_ret,0)) retcpo from
+(select channel,trans_date ,sum(cost) as cost,sum(acq_order) acq_order,sum(ret_order) as ret_order,coalesce(avg(acq_cost/acq_order),0) acqCpo,coalesce(avg(ret_cost/ret_order),0) retCpo from
+(select a.channel,trans_date, a.campaign_id,a.campaign_name,sum(cost) as cost,sum(acq_order) acq_order,sum(ret_order) ret_order ,sum((cost/(acq_order+ret_order))*acq_order)  acq_cost,sum((cost/(acq_order+ret_order))*ret_order) ret_cost from acq_ret_order a  
+join mktgspend b on lower(a.campaign_name)=lower(b.campaign_name) and a.trans_date=b.calendar_date and lower(a.adgroup_name)=lower(b.adgroup_name) and a.channel=b.channel
+group by a.channel,trans_date, a.campaign_id,a.campaign_name) a  
+group by channel,trans_date) a
+
+left join (select a.channel,a.calendar_date,sum(a.cost) as cost,coalesce(avg(cost*acq_perc),0) as cost_adjust,coalesce(avg(cost*ret_perc),0) as cost_adjust_ret from
+(select a.channel,calendar_date, sum(cost) cost from mktgspend a
+join acq_ret_order b on lower(a.campaign_name)=lower(b.campaign_name) and a.calendar_date=b.trans_date 
+where b.campaign_name is null
+group by a.channel,calendar_date) a
+join(select channel,trans_date, sum(acq_order) acq_order, sum(ret_order) ret_order,(sum(acq_order)/(sum(acq_order)+sum(ret_order))) as acq_perc,(sum(ret_order)/(sum(acq_order)+sum(ret_order))) as ret_perc from acq_ret_order
+group by channel,trans_date) b on a.channel=b.channel and a.calendar_date=b.trans_date
+group by a.channel,a.calendar_date) c on a.channel=c.channel and a.trans_date=c.calendar_date
+group by a.channel,a.trans_date;
+
+create table ret_cost_month as 
+select channel, month(trans_date) as month,year(trans_date) as year, sum(retmktgspend) as totalcost,avg(retcpo) as cpo from mktg_cost 
+group by channel,month(trans_date) ,year(trans_date);
 </sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
@@ -682,7 +706,7 @@ GROUP BY date_add(a.trans_date, 1-day(a.trans_date)+1),month(a.trans_date),year(
       <description/>
       <type>SQL</type>
       <sql>create table retention as
-select rsm.month_of_year,rsm.year_int as year,(INT((MONTH(concat(rsm.year_int,'-',rsm.month_of_year,'-','02'))-1)/3)+1) quarter,rsm.channel,numcustlost,numcustactive,numcustinactive,numcustreactive,numuniquecustomers,regain,lostpot,delta_ltv,cpo,
+select rsm.month_of_year,rsm.year_int as year,(INT((MONTH(concat(rsm.year_int,'-',rsm.month_of_year,'-','02'))-1)/3)+1) quarter,rsm.channel,numcustlost,numcustactive,numcustinactive,numcustreactive,numuniquecustomers,regain,lostpot,delta_ltv,coalesce(cpo,0) as cpo,coalesce(rcm.totalcost,0) as totalcost,
 cr.numorder as numorder,cr.totaluniquecustomer as totaluniquecustomer,coalesce(cr.profit,0)  as profit,coalesce(cr.revenue,0) as revenue,coalesce(rrt.roas,0) as roas
 from retentionsummary_month rsm
 left join ret_cost_month rcm on rsm.channel=rcm.channel and rsm.month_of_year=rcm.month and rsm.year_int=rcm.year
@@ -703,8 +727,8 @@ SUM(regain) as LTVREGAINED,
 SUM(lostpot) AS LOSTPOTENTIAL,
 SUM(delta_ltv) AS DELTALTV,
 sum(roas) as ROAS,
-avg(cpo) as CPO
---sum(totalcost) as TOTALCOST
+avg(cpo) as CPO,
+sum(totalcost) as MKTGSPEND
 FROM retention GROUP BY channel,year,month_of_year;
 
 CREATE  TABLE SCALE_TEMP2 AS 
@@ -721,8 +745,8 @@ SUM(regain) as LTVREGAINED,
 SUM(lostpot) AS LOSTPOTENTIAL,
 SUM(delta_ltv) AS DELTALTV,
 sum(roas) as ROAS,
-avg(cpo) as CPO
---sum(totalcost) as TOTALCOST
+avg(cpo) as CPO,
+sum(totalcost) as MKTGSPEND
 FROM retention GROUP BY channel,YEAR,quarter;
 
 CREATE  TABLE SCALE_TEMP3 AS 
@@ -739,22 +763,22 @@ SUM(regain) as LTVREGAINED,
 SUM(lostpot) AS LOSTPOTENTIAL,
 SUM(delta_ltv) AS DELTALTV,
 sum(roas) as ROAS,
-avg(cpo) as CPO
---sum(totalcost) as TOTALCOST
+avg(cpo) as CPO,
+sum(totalcost) as MKTGSPEND
 FROM retention GROUP BY channel,YEAR;
 
 CREATE TABLE Retention_mean_dev (CHANNEL STRING,WINDOW_SIZE STRING, SUM_TOTALREVENUE DOUBLE  ,SUM_OF_SQUARE_TOTALREVENUE DOUBLE, NUM_TOTALREVENUE INT, SUM_NUMORDERS BIGINT  ,SUM_OF_SQUARE_NUMORDERS BIGINT, NUM_NUMORDERS INT, SUM_NUMUNIQUECUSTOMERS BIGINT  ,SUM_OF_SQUARE_NUMUNIQUECUSTOMERS BIGINT , NUM_NUMUNIQUECUSTOMERS INT, SUM_TOTALPROFIT DOUBLE  ,SUM_OF_SQUARE_TOTALPROFIT DOUBLE , NUM_TOTALPROFIT  INT, SUM_CPO DOUBLE  ,SUM_OF_SQUARE_CPO DOUBLE , NUM_CPO  INT, SUM_PERCCUSTINACTIVE DOUBLE  ,SUM_OF_SQUARE_PERCCUSTINACTIVE DOUBLE ,  NUM_PERCCUSTINACTIVE  INT,SUM_PERCCUSTACTIVE DOUBLE  , SUM_OF_SQUARE_PERCCUSTACTIVE DOUBLE, NUM_PERCCUSTACTIVE INT, SUM_NUMCUSTLOST DOUBLE,SUM_OF_SQUARE_NUMCUSTLOST DOUBLE, NUM_NUMCUSTLOST INT, SUM_LTVREGAINED DOUBLE  ,SUM_OF_SQUARE_LTVREGAINED DOUBLE , NUM_LTVREGAINED INT, SUM_DELTALTV DOUBLE  ,SUM_OF_SQUARE_DELTALTV DOUBLE , NUM_DELTALTV INT, SUM_LOSTPOTENTIAL DOUBLE  ,SUM_OF_SQUARE_LOSTPOTENTIAL DOUBLE , NUM_LOSTPOTENTIAL INT ,SUM_NUMCUSTREACTIVE DOUBLE  ,SUM_OF_SQUARE_NUMCUSTREACTIVE DOUBLE , NUM_NUMCUSTREACTIVE INT,SUM_ROAS DOUBLE  ,SUM_OF_SQUARE_ROAS DOUBLE , NUM_ROAS INT
---,SUM_MKTGCOST DOUBLE ,SUM_OF_SQUARE_MKTGCOST DOUBLE, NUM_MKTGCOST INT
+,SUM_MKTGSPEND DOUBLE ,SUM_OF_SQUARE_MKTGSPEND DOUBLE, NUM_MKTGSPEND INT
 );
 
 INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"MONTHLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
---, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+, SUM(MKTGSPEND) AS SUM_MKTGSPEND,SUM(MKTGSPEND*MKTGSPEND) AS SUM_OF_SQUARE_MKTGSPEND, COUNT(MKTGSPEND) AS NUM_MKTGSPEND 
 FROM SCALE_TEMP1 GROUP BY CHANNEL;
 INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"QUARTERLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
---, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+, SUM(MKTGSPEND) AS SUM_MKTGSPEND,SUM(MKTGSPEND*MKTGSPEND) AS SUM_OF_SQUARE_MKTGSPEND, COUNT(MKTGSPEND) AS NUM_MKTGSPEND 
 FROM SCALE_TEMP2 GROUP BY CHANNEL;
 INSERT INTO RETENTION_MEAN_DEV  SELECT CHANNEL,"YEARLY",SUM(TOTALREVENUE) AS SUM_TOTALREVENUE, SUM(TOTALREVENUE*TOTALREVENUE) AS SUM_OF_SQUARE_TOTALREVENUE, COUNT(TOTALREVENUE) AS NUM_TOTALREVENUE, SUM(NUMORDERS) AS SUM_NUMORDERS,SUM(NUMORDERS*NUMORDERS) AS SUM_OF_SQUARE_NUMORDERS, COUNT(NUMORDERS) AS NUM_NUMORDERS, SUM(NUMUNIQUECUSTOMERS) AS SUM_NUMUNIQUECUSTOMERS,SUM(NUMUNIQUECUSTOMERS*NUMUNIQUECUSTOMERS) AS SUM_OF_SQUARE_NUMUNIQUECUSTOMERS, COUNT(NUMUNIQUECUSTOMERS) AS NUM_NUMUNIQUECUSTOMERS, SUM(TOTALPROFIT) AS SUM_TOTALPROFIT,SUM(TOTALPROFIT*TOTALPROFIT) AS SUM_OF_SQUARE_TOTALPROFIT, COUNT(TOTALPROFIT) AS NUM_TOTALPROFIT, SUM(CPO) AS SUM_CPO,SUM(CPO*CPO) AS SUM_OF_SQUARE_CPO, COUNT(CPO) AS NUM_CPO, SUM(PERCCUSTINACTIVE) AS SUM_PERCCUSTINACTIVE,SUM(PERCCUSTINACTIVE*PERCCUSTINACTIVE) AS  SUM_OF_SQUARE_PERCCUSTINACTIVE, COUNT(PERCCUSTINACTIVE) AS NUM_PERCCUSTINACTIVE, SUM(PERCCUSTACTIVE) AS SUM_PERCCUSTACTIVE, SUM(PERCCUSTACTIVE*PERCCUSTACTIVE) AS SUM_OF_SQUARE_PERCCUSTACTIVE, COUNT(PERCCUSTACTIVE) AS NUM_PERCCUSTACTIVE, SUM(NUMCUSTLOST) AS SUM_NUMCUSTLOST, SUM(NUMCUSTLOST*NUMCUSTLOST)  AS SUM_OF_SQUARE_NUMCUSTLOST, COUNT(NUMCUSTLOST) AS NUM_NUMCUSTLOST, SUM(LTVREGAINED) AS SUM_LTVREGAINED,SUM(LTVREGAINED*LTVREGAINED) AS SUM_OF_SQUARE_LTVREGAINED, COUNT(LTVREGAINED) AS NUM_LTVREGAINED, SUM(DELTALTV) AS SUM_DELTALTV,SUM(DELTALTV*DELTALTV) AS SUM_OF_SQUARE_DELTALTV, COUNT(DELTALTV) AS NUM_DELTALTV, SUM(LOSTPOTENTIAL) AS SUM_LOSTPOTENTIAL,SUM(LOSTPOTENTIAL*LOSTPOTENTIAL) AS SUM_OF_SQUARE_LOSTPOTENTIAL, COUNT(LOSTPOTENTIAL) AS NUM_LOSTPOTENTIAL,SUM(NUMCUSTREACTIVE) as SUM_NUMCUSTREACTIVE,SUM(NUMCUSTREACTIVE*NUMCUSTREACTIVE) as SUM_OF_SQUARE_NUMCUSTREACTIVE,COUNT(NUMCUSTREACTIVE) as NUM_NUMCUSTREACTIVE,SUM(ROAS) as SUM_ROAS,SUM(ROAS*ROAS) as SUM_OF_SQUARE_ROAS,COUNT(ROAS) as NUM_ROAS
---, SUM(MKTGCOST) AS SUM_MKTGCOST,SUM(MKTGCOST*MKTGCOST) AS SUM_OF_SQUARE_MKTGCOST, COUNT(MKTGCOST) AS NUM_MKTGCOST 
+, SUM(MKTGSPEND) AS SUM_MKTGSPEND,SUM(MKTGSPEND*MKTGSPEND) AS SUM_OF_SQUARE_MKTGSPEND, COUNT(MKTGSPEND) AS NUM_MKTGSPEND 
 FROM SCALE_TEMP3 GROUP BY CHANNEL;
 
 
