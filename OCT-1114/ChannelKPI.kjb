@@ -719,7 +719,7 @@ group by cc.channel,cc.start_date;</sql>
 select coalesce(a.channel,b.channel) as channel,cast(coalesce(a.trans_date,b.calendar_date) as date) as calendar_date,year(coalesce(a.trans_date,b.calendar_date)) year,month(coalesce(a.trans_date,b.calendar_date)) monthofyear,
 (INT((MONTH(coalesce(a.trans_date,b.calendar_date))-1)/3)+1) quarter,weekofyear(coalesce(a.trans_date,b.calendar_date)) weekofyear,
 coalesce(a.numorder,0) NUMORDERS,coalesce(a.totaluniquecustomer,0) TOTALNEWCUSTOMERS,coalesce(a.profit,0) PROFIT ,coalesce(a.revenue,0) TOTALREVENUE ,coalesce(b.num_imps,0) NUM_IMPS,coalesce(b.num_clicks,0) NUM_CLICKS, d.ltv ltv,
-coalesce(b.ctr,0) CTR,coalesce(b.conv_rate,0) conv_rate,coalesce(b.avg_cpc,0) avg_cpc, coalesce(b.conv,0) conv,coalesce(c.acqmktgspend,0) totalcost, coalesce(c.acqcpo,0) CPO, coalesce(revenue/if(coalesce(c.acqmktgspend,0)=0,1,c.acqmktgspend),0) ROAS from channelanalyticskpi_acq a  
+coalesce(b.ctr,0) CTR,coalesce(b.conv_rate,0) conv_rate,coalesce(b.avg_cpc,0) avg_cpc, coalesce(b.conv,0) conv,coalesce(c.acqmktgspend,0) totalcost, coalesce(c.acqcpo,0) CPO, round(coalesce(revenue/if(coalesce(c.acqmktgspend,0)=0,1,c.acqmktgspend),0),2)*100 ROAS from channelanalyticskpi_acq a  
 full join channelkpi3 b on a.channel=b.channel and a.trans_date=b.calendar_date
 left join mktg_cost c on a.channel=c.channel and a.trans_date=c.trans_date
 left join ltv_idx d on a.channel=d.channel and month(cast(coalesce(a.trans_date,b.calendar_date) as date))=month(d.start_date) and year(cast(coalesce(a.trans_date,b.calendar_date) as date))=year(d.start_date) ;
@@ -856,7 +856,7 @@ FROM SCALE_TEMP5 GROUP BY CHANNEL;
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>784</xloc>
-      <yloc>176</yloc>
+      <yloc>192</yloc>
     </entry>
     <entry>
       <name>PushDataMongo</name>
