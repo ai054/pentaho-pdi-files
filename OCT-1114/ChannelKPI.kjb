@@ -21,6 +21,11 @@
       <default_value/>
       <description/>
     </parameter>
+    <parameter>
+      <name>query</name>
+      <default_value/>
+      <description/>
+    </parameter>
   </parameters>
   <connection>
     <name>hadoop</name>
@@ -377,7 +382,7 @@
       <filename>${Internal.Job.Filename.Directory}/CreateBaseTable_Acq.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
+      <params_from_previous>Y</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
@@ -429,12 +434,12 @@ sum(kw_conv) AS conv,
 sum(kw_clicks*(kw_cpc/1000000))/sum(kw_clicks) as avg_cpc, 
 --sum(kw_clicks*(kw_cpc/1000000)) as totalCost,
 sum(totalconvvalue) as totalRevenue,
-null as position,
+cast(0 as int)as position,
 avg(quality_score) as avg_quality_score
-FROM feeds.acquisition_base a
+FROM ${query} a
 where  kw_imps > 0
 group by account_id,channel,a.calendar_date;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -811,7 +816,7 @@ SUM(CONV) AS CONV,
 SUM(NUM_CLICKS*AVG_CPC)/SUM(NUM_CLICKS) AS AVG_CPC,
 SUM(ROAS) AS ROAS,
 AVG(CPO)  AS CPO,
-SUM(ltv) AS LTV
+SUM(ltv) AS LTV,
 AVG(position) AS POSITION,
 AVG(avg_quality_score) AS AVG_QUALITY_SCORE
 FROM Acquisition GROUP BY CHANNEL,YEAR,QUARTER;
