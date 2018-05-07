@@ -1425,6 +1425,26 @@
         <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
+        <incoming_field_name>POSITION</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>Y</allow_null>
+      </mongo_field>
+      <mongo_field>
+        <incoming_field_name>AVG_QUALITY_SCORE</incoming_field_name>
+        <mongo_doc_path/>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&amp;Update</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>Y</allow_null>
+      </mongo_field>
+      <mongo_field>
         <incoming_field_name>CALENDAR_DATE</incoming_field_name>
         <mongo_doc_path>date</mongo_doc_path>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
@@ -1527,6 +1547,14 @@
       <field>
         <name>num_imps</name>
         <rename>NUM_IMPS</rename>
+      </field>
+      <field>
+        <name>position</name>
+        <rename>POSITION</rename>
+      </field>
+      <field>
+        <name>avg_quality_score</name>
+        <rename>AVG_QUALITY_SCORE</rename>
       </field>
       <field>
         <name>num_clicks</name>
@@ -1837,6 +1865,30 @@
       <field>
         <name>num_ltv</name>
         <rename>NUM_LTV</rename>
+      </field>
+      <field>
+        <name>sum_position</name>
+        <rename>SUM_POSITION</rename>
+      </field>
+      <field>
+        <name>sum_of_square_position</name>
+        <rename>SUM_OF_SQUARE_POSITION</rename>
+      </field>
+      <field>
+        <name>num_position</name>
+        <rename>NUM_PPOSITION</rename>
+      </field>
+      <field>
+        <name>sum_avg_quality_score</name>
+        <rename>SUM_AVG_QUALITY_SCORE</rename>
+      </field>
+      <field>
+        <name>sum_of_square_avg_quality_score</name>
+        <rename>SUM_OF_SQUARE_AVG_QUALITY_SCORE</rename>
+      </field>
+      <field>
+        <name>num_avg_quality_score</name>
+        <rename>NUM_AVG_QUALITY_SCORE</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
