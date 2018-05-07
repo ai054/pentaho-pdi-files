@@ -429,7 +429,7 @@ sum(kw_conv) AS conv,
 sum(kw_clicks*(kw_cpc/1000000))/sum(kw_clicks) as avg_cpc, 
 --sum(kw_clicks*(kw_cpc/1000000)) as totalCost,
 sum(totalconvvalue) as totalRevenue,
-avg(avg_position) as position,
+null as position,
 avg(quality_score) as avg_quality_score
 FROM feeds.acquisition_base a
 where  kw_imps > 0
