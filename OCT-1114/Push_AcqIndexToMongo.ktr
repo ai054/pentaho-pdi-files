@@ -1118,7 +1118,7 @@
         <allow_null>Y</allow_null>
       </mongo_field>
       <mongo_field>
-        <incoming_field_name>SUM_SQUARE_POSITION</incoming_field_name>
+        <incoming_field_name>SUM_OF_SQUARE_POSITION</incoming_field_name>
         <mongo_doc_path/>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
         <update_match_field>N</update_match_field>
