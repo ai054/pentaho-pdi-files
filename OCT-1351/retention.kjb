@@ -571,7 +571,7 @@ group by channel, a.trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name
 
 
 create table roas_ret as
-select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(sum(if(sum(cost)=0,0,sum(revenue)/sum(cost)),0)*100 as roas from (
+select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(if(sum(cost)=0,0,sum(revenue)/sum(cost)),0)*100 as roas from (
 select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from order_analytics_idx  oai
 join total_order_channel toc on oai.order_id=toc.order_id
 join acquisition_base ab on oai.campaign_id=ab.campaign_id and oai.adgroup_id=ab.adgroup_id and oai.trans_date=ab.calendar_date
