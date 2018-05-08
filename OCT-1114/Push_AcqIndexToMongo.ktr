@@ -1936,7 +1936,7 @@
       </field>
       <field>
         <name>num_position</name>
-        <rename>NUM_PPOSITION</rename>
+        <rename>NUM_POSITION</rename>
       </field>
       <field>
         <name>sum_avg_quality_score</name>
