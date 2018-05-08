@@ -21,6 +21,11 @@
       <default_value/>
       <description/>
     </parameter>
+    <parameter>
+      <name>query</name>
+      <default_value/>
+      <description/>
+    </parameter>
   </parameters>
   <connection>
     <name>hadoop</name>
@@ -522,7 +527,7 @@ drop table if exists mktg_cost;
       <description/>
       <type>SQL</type>
       <sql>create table mktgspend as 
-select channel,calendar_date,campaign_id,campaign_name,adgroup_id,adgroup_name, sum(kw_clicks)*sum(kw_cpc/1000000) cost from acquisition_base
+select channel,calendar_date,campaign_id,campaign_name,adgroup_id,adgroup_name, sum(kw_clicks)*sum(kw_cpc/1000000) cost from ${query} a
 group by channel,calendar_date,campaign_id,campaign_name,adgroup_id,adgroup_name;
 
 create table acq_ret_order as 
@@ -602,7 +607,7 @@ create table ret_cost_month as
 select channel, month(trans_date) as month,year(trans_date) as year, sum(retmktgspend) as totalcost,avg(retcpo) as cpo from mktg_cost 
 group by channel,month(trans_date) ,year(trans_date);
 </sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
+      <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
       <sendOneStatement>F</sendOneStatement>
@@ -982,7 +987,7 @@ GROUP BY year(start_date),month(start_date), channel;</sql>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1036,7 +1041,7 @@ GROUP BY year(start_date),month(start_date), channel;</sql>
       <to>PushDataMongo</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
