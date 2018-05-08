@@ -571,7 +571,7 @@ group by channel, a.trans_date,campaign_id,campaign_name,adgroup_id,adgroup_name
 
 
 create table roas_ret as
-select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(sum(revenue)/if(sum(cost)=0,1,sum(cost)),2)*100 as roas from (
+select channel, month(trans_date) as month_of_year,year(trans_date) as year_int, round(sum(if(sum(cost)=0,0,sum(revenue)/sum(cost)),0)*100 as roas from (
 select toc.channel,oai.trans_date,sum(oai.revenue) as revenue,sum(kw_clicks)*sum(kw_cpc/1000000) as cost from order_analytics_idx  oai
 join total_order_channel toc on oai.order_id=toc.order_id
 join acquisition_base ab on oai.campaign_id=ab.campaign_id and oai.adgroup_id=ab.adgroup_id and oai.trans_date=ab.calendar_date
@@ -987,7 +987,7 @@ GROUP BY year(start_date),month(start_date), channel;</sql>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -1041,7 +1041,7 @@ GROUP BY year(start_date),month(start_date), channel;</sql>
       <to>PushDataMongo</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
