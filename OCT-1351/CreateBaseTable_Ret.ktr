@@ -962,7 +962,7 @@ var query;
 
 if(data_feed_id==7)
 {
-query="select "+account_id+" as account_id,channel,calendar_date,a.campaign_id,adgroup_id,a.campaign_name,a.adgroup_name,campaign_status,adgroup_status,kw_clicks,kw_conv,kw_cpc,kw_imps,convratemanyperclick,totalconvvalue,cost from "+hive_table+ " a join campaigntype"+account_id+ " b on a.campaign_id=b.campaign_id";
+query="select "+account_id+" as account_id,channel,calendar_date,a.campaign_id,adgroup_id,a.campaign_name,a.adgroup_name,campaign_status,adgroup_status,kw_clicks,kw_conv,kw_cpc,kw_imps,convratemanyperclick,totalconvvalue,round(kw_clicks*(kw_cpc/1000000),2) as cost from "+hive_table+ " a join campaigntype"+account_id+ " b on a.campaign_id=b.campaign_id";
 }
 
 else if(data_feed_id==6)
