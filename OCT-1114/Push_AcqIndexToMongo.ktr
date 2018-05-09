@@ -1525,6 +1525,16 @@
         <allow_null>N</allow_null>
       </mongo_field>
       <mongo_field>
+        <incoming_field_name>DAY</incoming_field_name>
+        <mongo_doc_path>date</mongo_doc_path>
+        <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert</modifier_policy>
+        <json_field>N</json_field>
+        <allow_null>N</allow_null>
+      </mongo_field>
+      <mongo_field>
         <incoming_field_name>MONTH</incoming_field_name>
         <mongo_doc_path>date</mongo_doc_path>
         <use_incoming_field_name_as_mongo_field_name>Y</use_incoming_field_name_as_mongo_field_name>
@@ -1655,6 +1665,10 @@
       <field>
         <name>calendar_date</name>
         <rename>CALENDAR_DATE</rename>
+      </field>
+      <field>
+        <name>day</name>
+        <rename>DAY</rename>
       </field>
       <field>
         <name>year</name>
@@ -2059,7 +2073,7 @@
       <schema_name/>
     </partitioning>
     <connection>hadoop</connection>
-    <sql>select coalesce(a.channel,b.channel) as channel,cast(coalesce(a.trans_date,b.calendar_date) as date) as calendar_date,year(coalesce(a.trans_date,b.calendar_date)) year,month(coalesce(a.trans_date,b.calendar_date)) monthofyear,
+    <sql>select coalesce(a.channel,b.channel) as channel,cast(coalesce(a.trans_date,b.calendar_date) as date) as calendar_date,year(coalesce(a.trans_date,b.calendar_date)) year,month(coalesce(a.trans_date,b.calendar_date)) monthofyear,day(coalesce(a.trans_date,b.calendar_date)) as day,
 (INT((MONTH(coalesce(a.trans_date,b.calendar_date))-1)/3)+1) quarter,weekofyear(coalesce(a.trans_date,b.calendar_date)) weekofyear,
 a.numorder,a.totaluniquecustomer,a.profit,a.revenue ,b.num_imps num_imps,b.num_clicks,d.ltv,coalesce(position,0) as position,coalesce(avg_quality_score) avg_quality_score,
 b.ctr,b.conv_rate,b.avg_cpc, round(c.acqmktgspend,2) as totalcost,b.conv, round(c.acqcpo,2) as cpo, (round(if(coalesce(c.acqmktgspend,0)=0,0,revenue/c.acqmktgspend),0)*100) roas from channelanalyticskpi_acq a  
