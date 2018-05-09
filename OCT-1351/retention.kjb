@@ -712,11 +712,11 @@ GROUP BY date_add(a.trans_date, 1-day(a.trans_date)+1),month(a.trans_date),year(
       <type>SQL</type>
       <sql>create table retention as
 select rsm.month_of_year,rsm.year_int as year,(INT((MONTH(concat(rsm.year_int,'-',rsm.month_of_year,'-','02'))-1)/3)+1) quarter,rsm.channel,numcustlost,numcustactive,numcustinactive,numcustreactive,numuniquecustomers,regain,lostpot,delta_ltv,coalesce(cpo,0) as cpo,coalesce(rcm.totalcost,0) as totalcost,
-cr.numorder as numorder,cr.totaluniquecustomer as totaluniquecustomer,coalesce(cr.profit,0)  as profit,coalesce(cr.revenue,0) as revenue,coalesce(rrt.roas,0) as roas
+cr.numorder as numorder,cr.totaluniquecustomer as totaluniquecustomer,coalesce(cr.profit,0)  as profit,coalesce(cr.revenue,0) as revenue,round(if(coalesce(rcm.totalcost,0)=0,0,revenue/rcm.totalcost),0)*100 as roas
 from retentionsummary_month rsm
 left join ret_cost_month rcm on rsm.channel=rcm.channel and rsm.month_of_year=rcm.month and rsm.year_int=rcm.year
-left join channelanalyticskpi_ret cr on rsm.channel=cr.channel and rsm.month_of_year=cr.month_of_year and rsm.year_int=cr.year
-left join roas_ret rrt on rsm.month_of_year=rrt.month_of_year and rsm.year_int=rrt.year_int and rsm.channel=rrt.channel;
+left join channelanalyticskpi_ret cr on rsm.channel=cr.channel and rsm.month_of_year=cr.month_of_year and rsm.year_int=cr.year;
+--left join roas_ret rrt on rsm.month_of_year=rrt.month_of_year and rsm.year_int=rrt.year_int and rsm.channel=rrt.channel;
 
 CREATE  TABLE SCALE_TEMP1 AS 
 SELECT channel,
