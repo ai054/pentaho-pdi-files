@@ -10,8 +10,13 @@
     <directory>/</directory>
     <parameters>
       <parameter>
+        <name>HOST</name>
+        <default_value>34.239.170.20</default_value>
+        <description/>
+      </parameter>
+      <parameter>
         <name>account</name>
-        <default_value/>
+        <default_value>2</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -443,7 +448,7 @@
   </notepads>
   <connection>
     <name>hadoop</name>
-    <server>34.204.189.214</server>
+    <server>34.239.170.20</server>
     <type>HIVE2</type>
     <access>Native</access>
     <database>feeds</database>
@@ -524,9 +529,9 @@
       <enabled>N</enabled>
     </hop>
     <hop>
-      <from>Row denormaliser</from>
-      <to>output</to>
-      <enabled>N</enabled>
+      <from>Get Variables</from>
+      <to>Table input</to>
+      <enabled>Y</enabled>
     </hop>
   </order>
   <step>
@@ -634,8 +639,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>192</yloc>
+      <xloc>480</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -694,7 +699,7 @@
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>N</header>
     <footer>N</footer>
-    <format>DOS</format>
+    <format>UNIX</format>
     <compression>None</compression>
     <encoding/>
     <endedLine/>
@@ -716,7 +721,7 @@
       <date_time_format/>
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
-      <fast_dump>N</fast_dump>
+      <fast_dump>Y</fast_dump>
       <splitevery>0</splitevery>
     </file>
     <fields>
@@ -874,12 +879,12 @@
 , att_name
 , att_value
 , cal_value
-FROM trans_profile_${account}
+FROM transaction_profile${account}
 where customer_id not in ('00CASH','00HOME')</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup>Get Variables</lookup>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
@@ -895,8 +900,8 @@ where customer_id not in ('00CASH','00HOME')</sql>
     </GUI>
   </step>
   <step>
-    <name>output</name>
-    <type>TextFileOutput</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -905,38 +910,19 @@ where customer_id not in ('00CASH','00HOME')</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>${Internal.Transformation.Filename.Directory}/output</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>Y</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
     <fields>
+      <field>
+        <name>account</name>
+        <variable>${account}</variable>
+        <type>Integer</type>
+        <format>#</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -946,8 +932,8 @@ where customer_id not in ('00CASH','00HOME')</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>430</xloc>
-      <yloc>258</yloc>
+      <xloc>96</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -966,10 +952,6 @@ where customer_id not in ('00CASH','00HOME')</sql>
     </group>
     <group>
       <name>{"_":"Embedded MetaStore Elements","namespace":"NamedClusters","type":"NamedCluster"}</name>
-      <attribute>
-        <key>hadoop</key>
-        <value>{"children":[{"children":[],"id":"hdfsPassword","value":null},{"children":[],"id":"oozieUrl","value":"http://node-01.algo:8080/oozie"},{"children":[],"id":"mapr","value":"N"},{"children":[],"id":"useGateway","value":"N"},{"children":[],"id":"lastModifiedDate","value":"1500013133689"},{"children":[],"id":"jobTrackerHost","value":"node-01.algo"},{"children":[],"id":"zooKeeperHost","value":"node-01.algo"},{"children":[],"id":"shimIdentifier","value":null},{"children":[],"id":"gatewayUrl","value":null},{"children":[],"id":"jobTrackerPort","value":"8050"},{"children":[],"id":"zooKeeperPort","value":"2181"},{"children":[],"id":"name","value":"hadoop"},{"children":[],"id":"hdfsPort","value":"8020"},{"children":[],"id":"hdfsUsername","value":"TD054"},{"children":[],"id":"gatewayPassword","value":null},{"children":[],"id":"kafkaBootstrapServers","value":null},{"children":[],"id":"storageScheme","value":"hdfs"},{"children":[],"id":"hdfsHost","value":"node-01.algo"},{"children":[],"id":"gatewayUsername","value":null}],"id":"hadoop","value":null,"name":"hadoop","owner":null,"ownerPermissionsList":[]}</value>
-      </attribute>
     </group>
   </attributes>
 </transformation>

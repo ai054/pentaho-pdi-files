@@ -429,7 +429,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Job.Filename.Directory}/trans_profile_att_cal.ktr</filename>
+      <filename>${Internal.Job.Filename.Directory}/trans_profile_attribute_level.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -463,8 +463,8 @@
       <name>SQL</name>
       <description/>
       <type>SQL</type>
-      <sql>drop table if exists transaction_profile_${account};
-create table transaction_profile_${account} as
+      <sql>
+create table transaction_profile${account} as
 select a.customer_id, a.transdate,tm_btw_tx as date_diff,cum_custage, order_rank,prodage,round(profit,2) as profit,round(cum_profit,2) as cum_profit,att_name,att_value,cal_value from trans_base a
 join time_bw_txn b on a.customer_id=b.customer_id and a.transdate=b.transdate
 join trans_order_profit c on a.customer_id=c.customer_id and a.transdate=c.transdate
@@ -661,7 +661,8 @@ drop table if exists total_order_channel;
 drop table if exists analytics;
 drop table if exists order_profit;
 drop table if exists trans_profile_cal;
-drop table if exists trans_profile_pivot${account};</sql>
+drop table if exists trans_profile_pivot${account};
+drop table if exists transaction_profile${account};</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>

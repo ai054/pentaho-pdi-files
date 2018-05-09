@@ -686,7 +686,7 @@
     <target_file/>
     <no_execution>N</no_execution>
     <stream_source_step/>
-    <stream_target_step/>
+    <stream_target_step>Table input</stream_target_step>
     <mappings>
       <mapping>
         <target_step_name>Row denormaliser</target_step_name>
@@ -845,7 +845,7 @@
     <sql>SELECT
  att_name,
  att_value
-FROM transaction_profile_${account}
+FROM transaction_profile${account}
 where customer_id &lt;&gt; ''
 
 group by att_name, att_value</sql>
